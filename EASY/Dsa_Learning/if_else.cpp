@@ -7,6 +7,7 @@ Grade D if marks >= 35
 Fail, otherwise.*/
 
 
+
 class Solution {
   public:
       void studentGrade(int marks) {
