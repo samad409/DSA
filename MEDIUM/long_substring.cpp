@@ -29,7 +29,7 @@ public:
         for(i=0;i<255;i++) hash[i] = -1;
         while(r<size){
             if(hash[s[r]] != -1){
-                if(hash[s[r]] >= l)
+                if(hash[s[r]] >= 1)
                     l = hash[s[r]] + 1;
             }
             len = r-l + 1;
