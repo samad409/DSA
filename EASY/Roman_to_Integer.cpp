@@ -19,31 +19,28 @@ Given a roman numeral, convert it to an integer.*/
 
 class Solution {
 public:
+    int char2num(char a) {
+        switch (a) {
+            case 'I': return 1;
+            case 'V': return 5;
+            case 'X': return 10;
+            case 'L': return 50;
+            case 'C': return 100;
+            case 'D': return 500;
+            case 'M': return 1000;
+            default: return 0;
+        }
+    }
+
     int romanToInt(string s) {
-        unordered_map<char,int> hash;
-        hash['I'] = 1;
-        hash['V'] = 5;
-        hash['X'] = 10;
-        hash['L'] = 50;
-        hash['C'] = 100;
-        hash['D'] = 500;
-        hash['M'] = 1000;
-
-        if(s ==""|| s==" ") return 0;
-
-        int count = 0;
-
-        for(int i=0;i<s.size();i++){
-            if(hash[s[i]] < hash[s[i+1]]){
-                count = count + (hash[s[i+1]]-hash[s[i]]);
-                i++;
-            }
-            else{
-                count = count + hash[s[i]];
+        int result = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (i + 1 < s.length() && char2num(s[i]) < char2num(s[i + 1])) {
+                result -= char2num(s[i]);
+            } else {
+                result += char2num(s[i]);
             }
         }
-
-        return count;
-
+        return result;
     }
 };
