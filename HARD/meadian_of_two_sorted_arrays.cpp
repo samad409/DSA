@@ -30,49 +30,18 @@ nums2.length == n
 class Solution {
 public:
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-        int sizein = nums1.size()+nums2.size();
-        int a[sizein];
-        int i,j;
-        for(i=1;i<nums1.size()+1;i++)
-            a[i-1] = nums1[i-1];
-        int size = nums1.size();
-        for(i=1;i<nums2.size()+1;i++){
-            a[size] = nums2[i-1];
-            size++;
-        }
-        size = nums1.size()+nums2.size();
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size - i - 1; j++) {
-                if (a[j] > a[j + 1]) {
-                    int temp = a[j];
-                    a[j] = a[j + 1];
-                    a[j + 1] = temp;  
-                }
-            }
-}
+        vector<int> arr = nums1;              
+        arr.insert(arr.end(), nums2.begin(), nums2.end());
 
-        int med;
-        double k;
-        if(sizeof(a)/ sizeof(a[0])==0){
-            return {};
+        sort(arr.begin(), arr.end());
+
+        int n = arr.size();
+        if (n == 0) return 0; 
+
+        if (n % 2 == 0) {
+            return (arr[n / 2 - 1] + arr[n / 2]) / 2.0;
+        } else {
+            return arr[n / 2];
         }
-        else if(sizeof(a)/ sizeof(a[0])==1){
-            med = a[0];
-            return med;
-        }
-        else{
-            med = (size)/2;
-            k = (size)/2;
-        }
-        double out;
-        int b;
-        for(i=0;i<med;i++)
-             b = a[i];
-        if ( sizein % 2== 0){
-            out = b + a[med];
-            out = out / 2;
-            return out;
-        }
-        return a[med];
     }
 };
