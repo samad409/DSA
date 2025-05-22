@@ -25,12 +25,15 @@ Output: [0,1]*/
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        for(int i=0;i<nums.size()-1;i++){
-            for(int j=i+1;j<nums.size();j++){
-            if((nums[i]+nums[j]) == target){
-                return {i,j};
+        unordered_map<int,int> hash;
+        int size = nums.size();
+
+        for(int i=0;i<size;i++){
+            int ans = target - nums[i];
+            if(hash.find(ans)!=hash.end()){
+                return {i,hash[ans]};
             }
-        }
+            hash[nums[i]] = i;
         }
         return {0};
     }
